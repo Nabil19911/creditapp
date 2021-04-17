@@ -2,7 +2,10 @@ import { Table } from "semantic-ui-react";
 import PopUpModal from "../../modal/PopUpModal";
 import Head from "../../UI/Head";
 
-export default function CurrentCredits({ datas }) {
+export default function CurrentCredits({ datas, onGetDataFromCurrent }) {
+  const getData = (retrieveData) => {
+    onGetDataFromCurrent(retrieveData);
+  };
   return (
     <>
       <Table textAlign="center" celled>
@@ -30,7 +33,7 @@ export default function CurrentCredits({ datas }) {
             return (
               <Table.Row key={id}>
                 <Table.Cell>{date}</Table.Cell>
-                <Table.Cell>{username}</Table.Cell>
+                <Table.Cell>{username.toUpperCase()}</Table.Cell>
                 <Table.Cell>{credit}</Table.Cell>
                 <Table.Cell>{isPaid ? amount : 0}</Table.Cell>
                 <Table.Cell>{!isPaid ? amount : 0}</Table.Cell>
@@ -53,7 +56,7 @@ export default function CurrentCredits({ datas }) {
           })}
         </Table.Body>
       </Table>
-      <PopUpModal datas={datas} />
+      <PopUpModal onGetDataFromPopUp={getData} datas={datas} />
     </>
   );
 }

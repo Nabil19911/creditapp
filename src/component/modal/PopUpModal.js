@@ -13,7 +13,7 @@ function ModalReducer(state, action) {
 }
 
 // PopUpModal
-const PopUpModal = ({ datas }) => {
+const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
   const [state, dispatch] = React.useReducer(ModalReducer, {
     open: false,
     size: undefined,
@@ -27,16 +27,17 @@ const PopUpModal = ({ datas }) => {
 
   //   User Data
   const userInputData = {
+    id: Math.random(),
     date: date,
     username: username,
     isPaid: isPaid === "true" ? true : false,
-    amount: amount,
+    credit: 0,
+    amount: Number(amount),
   };
   //   Event listner
   const sumbitedForm = (e) => {
     e.preventDefault();
-    console.log(userInputData, datas);
-    datas.push(userInputData);
+    onGetDataFromPopUp(userInputData);
     // Close the modal
     dispatch({ type: "close" });
   };
@@ -61,6 +62,7 @@ const PopUpModal = ({ datas }) => {
               required
               type="date"
               onChange={(e) => {
+                console.log(typeof e.target.value);
                 setDate(e.target.value);
               }}
             />
