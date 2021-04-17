@@ -14,9 +14,18 @@ export default function Credits() {
     );
     if (usernameIndex >= 0) {
       // Need to fix this
-      retrieveData.isPaid
-        ? (data[usernameIndex].amount += retrieveData.amount)
-        : (data[usernameIndex].amount -= retrieveData.amount);
+      if (retrieveData.isPaid) {
+        data[usernameIndex].amount += retrieveData.amount;
+        // data[usernameIndex].isPaid = true;
+      } else {
+        if (data[usernameIndex].amount > retrieveData.amount) {
+          data[usernameIndex].amount -= retrieveData.amount;
+        } else {
+          data[usernameIndex].amount =
+            retrieveData.amount - data[usernameIndex].amount;
+          data[usernameIndex].isPaid = false;
+        }
+      }
       setCreditData([...data]);
       console.log(data);
     } else {
