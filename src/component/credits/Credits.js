@@ -8,13 +8,20 @@ export default function Credits() {
   const creditData = CreditData;
   const [data, setCreditData] = useState(creditData);
   const getData = (retrieveData) => {
-    data.forEach((element) => {
-      console.log(
-        element.username.toLowerCase() === retrieveData.username.toLowerCase()
-      );
-    });
-    setCreditData((prevData) => [...data, retrieveData]);
-    console.log(retrieveData);
+    const usernameIndex = data.findIndex(
+      (user) =>
+        user.username.toLowerCase() === retrieveData.username.toLowerCase()
+    );
+    if (usernameIndex >= 0) {
+      // Need to fix this
+      retrieveData.isPaid
+        ? (data[usernameIndex].amount += retrieveData.amount)
+        : (data[usernameIndex].amount -= retrieveData.amount);
+      setCreditData([...data]);
+      console.log(data);
+    } else {
+      setCreditData((prevData) => [...prevData, retrieveData]);
+    }
   };
   return (
     <Grid textAlign="center">

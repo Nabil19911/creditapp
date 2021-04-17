@@ -29,7 +29,7 @@ const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
   const userInputData = {
     id: Math.random(),
     date: date,
-    username: username,
+    username: username.trim(),
     isPaid: isPaid === "true" ? true : false,
     credit: 0,
     amount: Number(amount),
