@@ -15,8 +15,8 @@ export default function Credits() {
     );
     // Check the user input and update the Current credit table
     if (usernameIndex >= 0) {
-      // Fixing bug
-      if (retrieveData.isPaid) {
+      // Testing
+      if (data[usernameIndex].isPaid && retrieveData.isPaid) {
         data[usernameIndex].amount += retrieveData.amount;
         console.log("1" + retrieveData.isPaid);
       } else {
