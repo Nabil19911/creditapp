@@ -7,29 +7,44 @@ import MainCredits from "./maincredits/MainCredits";
 export default function Credits() {
   const creditData = CreditData;
   const [data, setCreditData] = useState(creditData);
+
   const getData = (retrieveData) => {
     const usernameIndex = data.findIndex(
       (user) =>
         user.username.toLowerCase() === retrieveData.username.toLowerCase()
     );
+    // Check the user input and update the Current credit table
     if (usernameIndex >= 0) {
-      // Need to fix this
+      // Fixing bug
       if (retrieveData.isPaid) {
         data[usernameIndex].amount += retrieveData.amount;
-        // data[usernameIndex].isPaid = true;
+        console.log("1" + retrieveData.isPaid);
       } else {
         if (data[usernameIndex].amount > retrieveData.amount) {
           data[usernameIndex].amount -= retrieveData.amount;
+
+          console.log("2" + [...data]);
         } else {
+          if (
+            data[usernameIndex].amount < retrieveData.amount &&
+            data[usernameIndex].isPaid
+          ) {
+            console.log("3" + [...data]);
+            data[usernameIndex].isPaid = false;
+          } else {
+            data[usernameIndex].isPaid = true;
+            console.log("4" + [...data]);
+          }
           data[usernameIndex].amount =
             retrieveData.amount - data[usernameIndex].amount;
-          data[usernameIndex].isPaid = false;
+          console.log("5" + [...data]);
         }
       }
       setCreditData([...data]);
-      console.log(data);
     } else {
-      setCreditData((prevData) => [...prevData, retrieveData]);
+      setCreditData([...data, retrieveData]);
+      console.log(retrieveData);
+      console.log("6" + [...data]);
     }
   };
   return (

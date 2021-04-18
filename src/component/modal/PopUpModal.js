@@ -38,9 +38,11 @@ const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
   const sumbitedForm = (e) => {
     e.preventDefault();
     onGetDataFromPopUp(userInputData);
+
     // Close the modal
     dispatch({ type: "close" });
   };
+
   return (
     <>
       <Button
@@ -62,7 +64,6 @@ const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
               required
               type="date"
               onChange={(e) => {
-                console.log(typeof e.target.value);
                 setDate(e.target.value);
               }}
             />
@@ -83,9 +84,14 @@ const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
             <select
               required
               onChange={(e) => {
+                console.log(e.target.value);
                 setIspaid(e.target.value);
               }}
+              defaultValue=""
             >
+              <option value="" disabled>
+                SELECTE
+              </option>
               <option value="true">PAID</option>
               <option value="false">NOT PAID</option>
             </select>
