@@ -30,33 +30,36 @@ export default function CurrentCredits({ datas, onGetDataFromCurrent }) {
         </Table.Header>
         <Table.Body>
           {datas.map(({ id, date, username, credit, isPaid, amount }) => {
-            return (
-              <Table.Row key={id}>
-                <Table.Cell>{date}</Table.Cell>
-                <Table.Cell>{username.toUpperCase()}</Table.Cell>
-                <Table.Cell>{credit}</Table.Cell>
-                <Table.Cell>{isPaid ? amount : 0}</Table.Cell>
-                <Table.Cell>{!isPaid ? amount : 0}</Table.Cell>
-                <Table.Cell
-                  style={
-                    isPaid && credit < amount
-                      ? { backgroundColor: "#C8F966" }
-                      : { backgroundColor: "#F9A266" }
-                  }
-                >
-                  {isPaid
-                    ? credit > amount
-                      ? credit - amount
-                      : amount - credit
-                    : credit + amount}
-                </Table.Cell>
-                <Table.Cell></Table.Cell>
-              </Table.Row>
-            );
+            if (amount !== 0) {
+              return (
+                <Table.Row key={id}>
+                  <Table.Cell>{date}</Table.Cell>
+                  <Table.Cell>{username.toUpperCase()}</Table.Cell>
+                  <Table.Cell>{credit}</Table.Cell>
+                  <Table.Cell>{isPaid ? amount : 0}</Table.Cell>
+                  <Table.Cell>{!isPaid ? amount : 0}</Table.Cell>
+                  <Table.Cell
+                    style={
+                      isPaid && credit < amount
+                        ? { backgroundColor: "#C8F966" }
+                        : { backgroundColor: "#F9A266" }
+                    }
+                  >
+                    {isPaid
+                      ? credit > amount
+                        ? credit - amount
+                        : amount - credit
+                      : credit + amount}
+                  </Table.Cell>
+                  <Table.Cell></Table.Cell>
+                </Table.Row>
+              );
+            }
+            return undefined;
           })}
         </Table.Body>
       </Table>
-      <PopUpModal onGetDataFromPopUp={getData} datas={datas} />
+      <PopUpModal onGetDataFromPopUp={getData} />
     </>
   );
 }

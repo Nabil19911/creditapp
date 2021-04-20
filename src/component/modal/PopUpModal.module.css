@@ -1,0 +1,39 @@
+.modal {
+  text-align: center;
+  height: 7rem;
+}
+.form input {
+  background-color: blanchedalmond;
+  outline: none;
+  border-style: none;
+  border: solid black 1px;
+  margin-right: 0.5rem;
+}
+.form input[type="text"],
+input[type="number"] {
+  font-size: 1.1rem;
+  padding: 0.16rem;
+  width: 150px;
+}
+
+.form button {
+  font-weight: bolder;
+  margin-left: 1rem;
+  background-color: rgb(21, 43, 0);
+  outline: none;
+  border-style: none;
+  border-radius: 5px;
+  width: 75px;
+  height: 25px;
+  color: aliceblue;
+}
+.form button:hover {
+  background-color: rgb(27, 54, 0);
+  box-shadow: black 0px 0px 5px 0px;
+}
+.form option[value="false"] {
+  background-color: rgb(179, 53, 53);
+}
+.form option[value="true"] {
+  background-color: rgb(39, 128, 39);
+}

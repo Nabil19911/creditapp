@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal } from "semantic-ui-react";
+import style from "./PopUpModal.module.css";
 
 function ModalReducer(state, action) {
   switch (action.type) {
@@ -13,7 +14,7 @@ function ModalReducer(state, action) {
 }
 
 // PopUpModal
-const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
+const PopUpModal = ({ onGetDataFromPopUp }) => {
   const [state, dispatch] = React.useReducer(ModalReducer, {
     open: false,
     size: undefined,
@@ -32,7 +33,7 @@ const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
     username: username.trim(),
     isPaid: isPaid === "true" ? true : false,
     credit: 0,
-    amount: Number(amount),
+    amount: +amount,
   };
   //   Event listner
   const sumbitedForm = (e) => {
@@ -46,6 +47,7 @@ const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
   return (
     <>
       <Button
+        floated={"right"}
         positive
         onClick={() => dispatch({ type: "open", size: "small" })}
       >
@@ -58,11 +60,12 @@ const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
         onClose={() => dispatch({ type: "close" })}
       >
         <Modal.Header>ADD CREDIT</Modal.Header>
-        <Modal.Content>
-          <form onSubmit={sumbitedForm}>
+        <Modal.Content className={style.modal}>
+          <form className={style.form} onSubmit={sumbitedForm}>
             <input
               required
               type="date"
+              value={date}
               onChange={(e) => {
                 setDate(e.target.value);
               }}
@@ -84,13 +87,12 @@ const PopUpModal = ({ datas, onGetDataFromPopUp }) => {
             <select
               required
               onChange={(e) => {
-                console.log(e.target.value);
                 setIspaid(e.target.value);
               }}
               defaultValue=""
             >
               <option value="" disabled>
-                SELECTE
+                SELECT
               </option>
               <option value="true">PAID</option>
               <option value="false">NOT PAID</option>
